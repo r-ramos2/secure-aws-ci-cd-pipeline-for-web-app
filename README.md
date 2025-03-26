@@ -1,71 +1,102 @@
-# Java Web App Deployment with AWS CI/CD
+# 7 Day DevOps Challenge: NextWork Web Project
 
-Welcome to this project combining Java web app development and AWS CI/CD tools!
+## Overview
+This project builds a CI/CD pipeline for a Java-based web application running on an AWS EC2 instance. The pipeline automates the build, testing, and deployment processes, integrating GitHub and AWS CI/CD tools. It demonstrates version control with Git, automating code deployment, and improving software release cycles.
 
-<br>
-
-## Table of Contents
-- [Introduction](#introduction)
-- [Technologies](#technologies)
-- [Setup](#setup)
-- [Contact](#contact)
-- [Conclusion](#conclusion)
-
-<br>
-
-## Introduction
-This project is used for an introduction to creating and deploying a Java-based web app using AWS, especially their CI/CD tools.
-
-The deployment pipeline I'm building around the Java web app in this repository is invisible to the end-user, but makes a big impact by automating the software release processes.
-
-- I'm doing this project to learn more about CI/CD and get hands on experience in automating the flow from developing code to deployed web app. 
-- This fits into my career goals because I want to become a DevOps engineer this year!
-
-<br>
+## Features
+- **Version Control:** Manage code changes with Git.
+- **Remote Repository:** Sync code with GitHub.
+- **Secure Auth:** Use Personal Access Tokens for GitHub authentication.
+- **Remote Editing:** Edit code on EC2 via VSCode.
+- **CI/CD Pipeline:** Automate build and deployment steps using AWS tools.
+- **Java Web App:** The project uses Java, Maven, and other AWS services for development and deployment.
 
 ## Technologies
 Here’s what I’m using for this project:
 
-- **Amazon EC2**: I'm developing my web app on Amazon EC2 virtual servers, so that software development and deployment happens entirely on the cloud.
-- Key pairs, SSH connections, Git, Maven and Java.
-- **VSCode**: For my IDE, I chose Visual Studio Code. It connects directly to my development EC2 instance, making it easy to edit code and manage files in the cloud.
-- **GitHub**: All my web app code is stored and versioned in this GitHub repository.
-- **[COMING SOON] AWS CodeArtifact**: Once it's rolled out, CodeArtifact will store my artifacts and dependencies, which is great for high availability and speeding up my project's build process.
-- **[COMING SOON] AWS CodeBuild**: Once it's rolled out, CodeBuild will take over my build process. It'll compile the source code, run tests, and produce ready-to-deploy software packages automatically.
-- **[COMING SOON] AWS CodeDeploy**: Once it's rolled out, CodeDeploy will automate my deployment process across EC2 instances.
-- **[COMING SOON] AWS CodePipeline**: Once it's rolled out, CodePipeline will automate the entire process from GitHub to CodeDeploy, integrating build, test, and deployment steps into one efficient workflow.
+- **Amazon EC2:** The web app is developed and deployed on EC2 virtual servers, providing cloud-based development and hosting.
+- **VSCode:** I use Visual Studio Code with the Remote-SSH extension for editing files directly on the EC2 instance.
+- **GitHub:** All project code is stored and versioned on GitHub.
+- **Maven:** The build automation tool used for managing dependencies and building the Java application.
+- **AWS CI/CD Tools:** The project leverages AWS services to automate the software delivery pipeline:
+- **AWS CodeArtifact**: Manages project dependencies and artifacts.
+- **AWS CodeBuild**: Handles the build process, compiling source code and running tests.
+- **AWS CodeDeploy**: Automates deployment across EC2 instances.
+- **AWS CodePipeline**: Integrates and automates the entire workflow from GitHub to CodeDeploy.
 
+## Setup & Installation
 
-<br>
+1. **Prerequisites:**
+   - AWS EC2 instance with Git and Maven installed.
+   - VSCode with the Remote-SSH extension for editing files.
+   - A GitHub account.
 
-## Setup
-To get this project up and running on your local machine, follow these steps:
+2. **Clone the Repository:**
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/nextwork-web-project.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd nextwork-web-project
-    ```
-3. Install dependencies:
-    ```bash
-    mvn install
-    ```
+   ```bash
+   git clone https://github.com/yourusername/nextwork-web-project.git
+   cd nextwork-web-project
+   ```
 
-<br>
+3. **Install Dependencies:**
+   - Install Maven dependencies:
 
-## Contact
-If you have any questions or comments about the my CI/CD project, please contact:
-Natasha - [email@example.com](mailto:email@example.com)
+     ```bash
+     mvn install
+     ```
 
-- [LinkedIn](https://www.linkedin.com/in/natasha-ong/)
+4. **Configure Git:**
 
-<br>
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "your.email@example.com"
+   ```
 
-## Conclusion
-Thank you for exploring this project! I'll continue to build this pipeline and apply my learnings to future projects.
+5. **Connect to GitHub:**
+   - Generate a Personal Access Token on GitHub.
+   - Add the remote repository:
 
-A big shoutout to **[NextWork](https://learn.nextwork.org/app)** for their project guide and support. [You can get started with this DevOps series project too by clicking here.](https://learn.nextwork.org/projects/aws-devops-vscode?track=high)
+     ```bash
+     git remote add origin https://github.com/yourusername/nextwork-web-project.git
+     ```
 
+## Usage
+
+1. **Edit Files:**
+   - Open the project in VSCode.
+   - Modify files (e.g., update `index.jsp` with personalized content).
+
+2. **Stage, Commit, and Push Changes:**
+
+   ```bash
+   git add .
+   git commit -m "Describe your changes here"
+   git push -u origin main
+   ```
+
+3. **Review History:**
+   - To view pending changes, run:
+
+     ```bash
+     git diff --staged
+     ```
+
+   - To view commit history, run:
+
+     ```bash
+     git log
+     ```
+
+## CI/CD Pipeline
+This project is part of a 7-day challenge that gradually builds a complete CI/CD pipeline. Future updates will add testing and automated deployment using AWS services like CodeBuild, CodeDeploy, and CodePipeline.
+
+## Troubleshooting
+- **Authentication:** Use a Personal Access Token instead of your password.
+- **No Updates on GitHub:** Ensure that you have committed and pushed your changes.
+- **Terminal Issues:** Press `q` to exit pager views if the terminal seems stuck.
+
+## Contributing
+Contributions are welcome! Fork the repository and submit pull requests with improvements or bug fixes.
+
+## Acknowledgements
+Special thanks to **[NextWork](https://learn.nextwork.org/app)** for their project guide and support. You can get started with this DevOps series project too by [clicking here](https://learn.nextwork.org/projects/aws-devops-vscode?track=high).
