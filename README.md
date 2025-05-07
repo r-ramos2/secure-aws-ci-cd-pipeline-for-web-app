@@ -33,7 +33,6 @@ This repository demonstrates a complete CI/CD pipeline for a Java-based web appl
 5. [CI/CD Pipeline](#cicd-pipeline)
 6. [Troubleshooting](#troubleshooting)
 7. [Contributing](#contributing)
-8. [License](#license)
 
 ---
 
@@ -111,7 +110,3 @@ Future enhancements will include automated testing and multi‑region deployment
 ### Contributing
 
 Contributions are welcome! Fork this repo, create a feature branch, and submit a pull request.
-
-### License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
