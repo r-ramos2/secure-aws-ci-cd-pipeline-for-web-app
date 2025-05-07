@@ -1,91 +1,117 @@
-<img src="https://cdn.prod.website-files.com/677c400686e724409a5a7409/6790ad949cf622dc8dcd9fe4_nextwork-logo-leather.svg" alt="NextWork" width="300" />
+## 7-Day DevOps Challenge: NextWork Web Project
 
-# Build a CI/CD Pipeline with AWS
+### Overview
 
-**Project Link:** [View Project](http://learn.nextwork.org/projects/aws-devops-codepipeline-updated)
+This repository demonstrates a complete CI/CD pipeline for a Java-based web application running on AWS EC2. It integrates GitHub with AWS CI/CD services to automate build, test, and deployment workflows, showcasing best practices in version control, continuous integration, and continuous deployment.
 
----
+### Features
 
-![Image](http://learn.nextwork.org/serene_teal_majestic_duck/uploads/aws-devops-codepipeline-updated_fbdetger)
+* **Version Control:** Git tracking for all code changes
+* **Remote Repository:** Sync with GitHub
+* **Secure Authentication:** GitHub Personal Access Tokens
+* **Remote Development:** VSCode Remote‑SSH on EC2
+* **CI/CD Pipeline:** AWS CodePipeline, CodeBuild, CodeDeploy, CodeArtifact
+* **Java Web App:** Maven‑based build and packaging
 
----
+### Technologies
 
-## Introducing Today's Project!
+* **Amazon EC2:** Cloud servers for hosting and development
+* **VSCode + Remote‑SSH:** Edit files directly on EC2
+* **GitHub:** Source code management and collaboration
+* **Maven:** Dependency management and build automation
+* **AWS CodeArtifact:** Artifact repository
+* **AWS CodeBuild:** Build and test automation
+* **AWS CodeDeploy:** Deployment orchestration
+* **AWS CodePipeline:** End‑to‑end workflow automation
 
-In this project, I will demonstrate building a CI/CD pipeline using AWS CodePipeline. I'm doing this project to learn how to automate the build and deployment of a web app, integrating services like CodeBuild and CodeDeploy for efficient delivery.
+### Table of Contents
 
-### Key tools and concepts
-
-Services I used were AWS CodePipeline, CodeDeploy, CodeBuild, EC2, S3, CloudFormation, IAM, and CodeArtifact. Key concepts I learnt include CI/CD automation, infrastructure as code, and automated rollback and deployment.
-
-### Project reflection
-
-This project took me approximately 3 hours. The most challenging part was integrating multiple AWS services, while the most rewarding was seeing seamless, automated deployments in real time.
-
----
-
-## Starting a CI/CD Pipeline
-
-AWS CodePipeline is a fully managed service that automates the workflow for building, testing, and deploying applications. It integrates with AWS services to ensure consistent, reliable, and automated deployments, minimizing manual intervention.
-
-CodePipeline offers different execution modes based on concurrency. I chose Superseded mode, where new executions replace the old. Other options include Queued mode, where executions wait, and Parallel mode, which allows concurrent executions.
-
-A service role gets created automatically during setup so CodePipeline can perform actions on your behalf, like accessing resources such as S3 buckets and CodeBuild, ensuring the pipeline runs smoothly without manual intervention.
-
-![Image](http://learn.nextwork.org/serene_teal_majestic_duck/uploads/aws-devops-codepipeline-updated_gdnhtm)
-
----
-
-## CI/CD Stages
-
-​The three stages I've set up in my CI/CD pipeline are Source, Build, and Deploy. While setting up each part, I learned about automating code integration, building processes, and deployment strategies for efficient and reliable software delivery.
-
-CodePipeline organizes the three stages into Source, Build, and Deploy. In each stage, you can see more details on actions performed, their providers, execution times, and success or failure statuses. 
-
-![Image](http://learn.nextwork.org/serene_teal_majestic_duck/uploads/aws-devops-codepipeline-updated_fbdetger)
+1. [Prerequisites](#prerequisites)
+2. [Installation](#installation)
+3. [Configuration](#configuration)
+4. [Usage](#usage)
+5. [CI/CD Pipeline](#cicd-pipeline)
+6. [Troubleshooting](#troubleshooting)
+7. [Contributing](#contributing)
+8. [License](#license)
 
 ---
 
-## Source Stage
+### Prerequisites
 
-​In the Source stage, the default branch tells CodePipeline to monitor that branch for changes, ensuring the pipeline triggers on new commits. The default branch serves as the primary base of development, where all changes eventually merge back.
+* An AWS account with permissions to create EC2, IAM, CodeArtifact, CodeBuild, CodeDeploy, and CodePipeline resources
+* AWS CLI configured with appropriate credentials
+* Java SDK and Maven installed on your local machine or EC2
+* VSCode with Remote‑SSH extension
+* Git and GitHub account
 
-The source stage is also where you enable webhook events, which allow CodePipeline to automatically start your pipeline whenever code is pushed to your specified branch in GitHub.
+### Installation
 
-![Image](http://learn.nextwork.org/serene_teal_majestic_duck/uploads/aws-devops-codepipeline-updated_sergt)
+1. Clone the repository:
 
----
+   ```bash
+   git clone https://github.com/<your-username>/nextwork-web-project.git
+   cd nextwork-web-project
+   ```
+2. Install dependencies:
 
-## Build Stage
+   ```bash
+   mvn install
+   ```
 
-The Build stage sets up CodeBuild to compile and package our web app. I configured the Source stage to output our code as SourceArtifact. The input artifact for the build stage is SourceArtifact, ensuring CodeBuild always processes the latest code.
+### Configuration
 
-![Image](http://learn.nextwork.org/serene_teal_majestic_duck/uploads/aws-devops-codepipeline-updated_j1k2l3m4)
+1. Configure Git locally:
 
----
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+   ```
+2. Connect to GitHub with a Personal Access Token:
 
-## Deploy Stage
+   ```bash
+   git remote add origin https://<TOKEN>@github.com/<your-username>/nextwork-web-project.git
+   ```
+3. SSH into your EC2 instance and install required packages:
 
-​The Deploy stage deploys the built application to the target environment. I configured AWS CodeDeploy as the deployment provider, selected the existing CodeDeploy application and deployment group, and enabled automatic rollback to ensure stability.
+   ```bash
+   sudo yum update -y
+   sudo yum install git java-11-openjdk-devel maven -y
+   ```
 
-![Image](http://learn.nextwork.org/serene_teal_majestic_duck/uploads/aws-devops-codepipeline-updated_m4n5o6p7)
+### Usage
 
----
+1. Open the project in VSCode via Remote‑SSH.
+2. Make code changes (e.g., update `src/main/webapp/index.jsp`).
+3. Stage, commit, and push:
 
-## Success!
+   ```bash
+   git add .
+   git commit -m "Describe your changes"
+   git push origin main
+   ```
+4. Monitor the pipeline in the AWS Console under CodePipeline.
 
-Since my CI/CD pipeline gets triggered by code changes, I tested my pipeline by adding a new line in index.jsp's <body> section, committing, and pushing to master. This confirmed automated deployment.
+### CI/CD Pipeline
 
-​The moment I pushed the code change to GitHub, CodePipeline automatically detected the update, initiating the Source stage. The commit message under each stage reflects the changes made, confirming the pipeline's responsiveness to code updates.​
+This pipeline runs on every push to the `main` branch:
 
-​Once my pipeline executed successfully, I checked the deployment by accessing the web application through its public URL. The new line added to index.jsp was visible, confirming that CodePipeline had automatically deployed my latest changes. ​
+1. **Source:** GitHub repository triggers via webhook
+2. **Build:** CodeBuild compiles and tests the application
+3. **Deploy:** CodeDeploy pushes artifacts to the EC2 instance
 
-![Image](http://learn.nextwork.org/serene_teal_majestic_duck/uploads/aws-devops-codepipeline-updated_e1f2g3h4)
+Future enhancements will include automated testing and multi‑region deployments.
 
----
+### Troubleshooting
 
-## Testing the Pipeline
+* **Authentication Errors:** Verify your GitHub token scopes
+* **Build Failures:** Check the `buildspec.yml` and ensure Maven can resolve dependencies
+* **Deployment Hangs:** Confirm IAM roles and instance tags match your CodeDeploy configuration
 
----
+### Contributing
 
----
+Contributions are welcome! Fork this repo, create a feature branch, and submit a pull request.
+
+### License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
